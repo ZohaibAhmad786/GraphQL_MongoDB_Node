@@ -9,7 +9,7 @@ var { graphqlHTTP } = require('express-graphql');
 var GraphQLSchema = require('./graphql/schema');
 var GraphQLResolvers = require('./graphql/resolver');
 
-
+var isAuthenticated= require("./middleware/is-auth")
 
 
 
@@ -25,6 +25,8 @@ var app = express();
 
 // parse application/json
 app.use(bodyParser.json())
+
+app.use(isAuthenticated)
 
 app.use('/graphql', graphqlHTTP({
     schema: schema,//scehma
